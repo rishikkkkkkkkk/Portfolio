@@ -126,7 +126,7 @@ export default function App() {
           className="text-[12vw] leading-[0.85] font-bold tracking-tighter text-white mb-12 uppercase mix-blend-difference"
         >
           Rishit<br />
-          <span className="text-neutral-500">&</span> Kumar
+          <span className="text-neutral-500"></span> Kumar
         </motion.h1>
         
         <motion.div 
