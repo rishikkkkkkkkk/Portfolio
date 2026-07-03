@@ -254,9 +254,9 @@ export default function App() {
         </motion.div>
         
         <div className="flex gap-6 text-sm uppercase tracking-widest text-neutral-500 font-medium z-10">
-          <a href="#" className="hover:text-white transition-colors duration-300">GitHub</a>
-          <a href="#" className="hover:text-white transition-colors duration-300">LinkedIn</a>
-          <a href="#" className="hover:text-white transition-colors duration-300">Resume</a>
+          <a href="https://github.com/rishikkkkkk" className="hover:text-white transition-colors duration-300">GitHub</a>
+          <a href="https://www.linkedin.com/in/rishitkumar1/" className="hover:text-white transition-colors duration-300">LinkedIn</a>
+          <a href="https://drive.google.com/file/d/16Z-yR3tqlwp8g7jAb6OhfRfrhocUgRO9/view?usp=sharing" className="hover:text-white transition-colors duration-300">Resume</a>
         </div>
       </footer>
 
