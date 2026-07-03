@@ -249,7 +249,7 @@ export default function App() {
             Let's<br />Build
           </h2>
           <a href="mailto:contact@rishit.me" className="text-lg md:text-xl text-neutral-400 hover:text-white transition-colors duration-300">
-            contact@rishit.me
+            workwithrishik@gmail.com
           </a>
         </motion.div>
         
