@@ -248,7 +248,7 @@ export default function App() {
           <h2 className="text-[8vw] md:text-7xl font-bold text-white tracking-tighter uppercase leading-none mb-6">
             Let's<br />Build
           </h2>
-          <a href="@workwithrishik@gmail.com" className="text-lg md:text-xl text-neutral-400 hover:text-white transition-colors duration-300">
+          <a href="mailto:workwithrishik@gmail.com" className="text-lg md:text-xl text-neutral-400 hover:text-white transition-colors duration-300">
             workwithrishik@gmail.com
           </a>
         </motion.div>
