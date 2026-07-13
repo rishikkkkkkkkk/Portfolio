@@ -72,7 +72,7 @@ export default function App() {
       </main>
 
       {/* SERVICES */}
-      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 backdrop-blur-md bg-[#050505]/60 overflow-hidden">
+      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent overflow-hidden">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -114,7 +114,7 @@ export default function App() {
       </section>
 
       {/* SELECTED WORKS */}
-      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 backdrop-blur-md bg-[#050505]/70">
+      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -163,7 +163,7 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-neutral-800/50 backdrop-blur-md bg-[#050505]/80 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
         <motion.div
           initial="hidden"
           whileInView="visible"

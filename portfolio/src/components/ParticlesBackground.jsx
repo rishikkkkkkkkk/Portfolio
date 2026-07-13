@@ -185,8 +185,8 @@ const Particles = () => {
         const offsets = new Float32Array(count * 3);
         const randoms = new Float32Array(count);
 
-        const gridWidth = 40;
-        const gridHeight = 22;
+        const gridWidth = viewport.width * 1.2;
+        const gridHeight = viewport.height * 1.2;
         const jitter = 0.25; // Subtle offset for organic feel
 
         let i = 0;
@@ -212,7 +212,7 @@ const Particles = () => {
 
         meshRef.current.geometry.setAttribute('aOffset', new THREE.InstancedBufferAttribute(offsets, 3));
         meshRef.current.geometry.setAttribute('aRandom', new THREE.InstancedBufferAttribute(randoms, 1));
-    }, [count, countX, countY]);
+    }, [count, countX, countY, viewport.width, viewport.height]);
 
     useFrame((state) => {
         const { clock } = state;
@@ -239,7 +239,7 @@ const Particles = () => {
 
 export default function ParticlesBackground() {
     return (
-        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#0a0a0a]">
+        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#0a0a0a]">
             <Canvas camera={{ position: [0, 0, 12], fov: 60 }}>
                 <Particles />
             </Canvas>
