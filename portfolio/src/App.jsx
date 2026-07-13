@@ -1,81 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-
-// --- 1. THE CUSTOM ANIMATED BACKGROUND ---
-const AnimatedBackground = () => {
-  // Array of 6 distinct blobs with varied starting positions, colors, and animation values
-  const blobs = [
-    {
-      id: 1,
-      bg: 'radial-gradient(circle, #3b0764 0%, transparent 70%)', // Deep Purple
-      size: '45vw', top: '-10%', left: '-10%', opacity: 0.25,
-      animate: { x: [0, 80, -20, 0], y: [0, 50, 100, 0], scale: [1, 1.1, 0.9, 1] },
-      duration: 12
-    },
-    {
-      id: 2,
-      bg: 'radial-gradient(circle, #1e1b4b 0%, transparent 70%)', // Indigo
-      size: '55vw', top: '40%', left: '50%', opacity: 0.35,
-      animate: { x: [0, -120, -50, 0], y: [0, -80, 20, 0], scale: [1, 1.2, 1.05, 1] },
-      duration: 14
-    },
-    {
-      id: 3,
-      bg: 'radial-gradient(circle, #0e7490 0%, transparent 70%)', // Cyan
-      size: '40vw', top: '60%', left: '-5%', opacity: 0.2,
-      animate: { x: [0, 100, 50, 0], y: [0, -60, -100, 0], scale: [1, 1.15, 0.95, 1] },
-      duration: 10
-    },
-    {
-      id: 4,
-      bg: 'radial-gradient(circle, #4c1d95 0%, transparent 70%)', // Violet
-      size: '50vw', top: '-5%', left: '60%', opacity: 0.25,
-      animate: { x: [0, -80, 40, 0], y: [0, 100, 40, 0], scale: [1, 1.05, 1.1, 1] },
-      duration: 13
-    },
-    {
-      id: 5,
-      bg: 'radial-gradient(circle, #172554 0%, transparent 70%)', // Midnight Blue
-      size: '35vw', top: '20%', left: '20%', opacity: 0.3,
-      animate: { x: [0, 60, -40, 0], y: [0, 90, -30, 0], scale: [1, 1.25, 0.9, 1] },
-      duration: 9
-    },
-    {
-      id: 6,
-      bg: 'radial-gradient(circle, #083344 0%, transparent 70%)', // Deep Teal
-      size: '60vw', top: '70%', left: '30%', opacity: 0.15,
-      animate: { x: [0, -60, 30, 0], y: [0, -100, -40, 0], scale: [1, 1.1, 1.05, 1] },
-      duration: 15
-    }
-  ];
-
-  return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#0a0a0a]">
-      {blobs.map((blob) => (
-        <motion.div
-          key={blob.id}
-          className="absolute rounded-full mix-blend-screen pointer-events-none"
-          style={{
-            background: blob.bg,
-            width: blob.size,
-            height: blob.size,
-            top: blob.top,
-            left: blob.left,
-            opacity: blob.opacity,
-            filter: 'blur(100px)', // Creates the thick aurora fog effect
-          }}
-          animate={blob.animate}
-          transition={{
-            repeat: Infinity,
-            repeatType: "mirror",
-            duration: blob.duration,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+import ParticlesBackground from './components/ParticlesBackground';
 
 // --- 2. MAIN PORTFOLIO COMPONENT ---
 export default function App() {
@@ -97,8 +22,8 @@ export default function App() {
   return (
     <div className="relative min-h-screen text-neutral-300 font-sans selection:bg-white selection:text-black">
       
-      {/* INJECTED FRAMER MOTION BACKGROUND */}
-      <AnimatedBackground />
+      {/* GOOGLE ANTIGRAVITY PARTICLE BACKGROUND */}
+      <ParticlesBackground />
       
       {/* TOP NAVIGATION */}
       <motion.nav 
