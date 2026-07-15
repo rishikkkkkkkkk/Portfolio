@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import NeonRibbonBackground from './components/NeonRibbonBackground';
 
 // --- MAIN PORTFOLIO COMPONENT ---
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
   };
 
   const dropdownArrow = (
-    <svg className="w-3 h-3 opacity-60 ml-1.5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-3.5 h-3.5 opacity-60 ml-1.5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
     </svg>
   );
@@ -27,83 +28,143 @@ export default function App() {
   return (
     <div className="relative min-h-screen text-neutral-300 font-sans selection:bg-purple-500 selection:text-white">
       
-      {/* FLOATING GLASS NAVIGATION (Dribbble Hero Header UI Style) */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#04010a]/50 border-b border-white/[0.05]">
+      {/* FLOWING NEON LASER BACKDROP (Wavespace Fin Header Design) */}
+      <NeonRibbonBackground />
+      
+      {/* FLOATING GLASS HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#030108]/60 border-b border-white/[0.04]">
         <motion.nav 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="flex justify-between items-center w-full max-w-7xl mx-auto py-5 px-6 md:px-12"
         >
-          {/* Left: Eagle Logo */}
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain opacity-90" />
-            <span className="text-white font-extrabold tracking-wider text-sm font-mono">RISHIT.KUMAR</span>
+          {/* Left Side: Logo + Divider + Menu Links */}
+          <div className="flex items-center">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain opacity-95" />
+              <span className="text-white font-black tracking-wider text-xs font-mono">RK</span>
+            </div>
+            
+            {/* Vertical Divider */}
+            <div className="w-[1px] h-5 bg-white/20 mx-4 hidden md:block" />
+
+            {/* Menu items */}
+            <div className="hidden md:flex items-center gap-6 text-neutral-400 text-xs font-bold uppercase tracking-wider">
+              <a href="#services" className="hover:text-white transition-colors duration-200">
+                Services{dropdownArrow}
+              </a>
+              <a href="#projects" className="hover:text-white transition-colors duration-200">
+                Projects{dropdownArrow}
+              </a>
+              <a href="#contact" className="hover:text-white transition-colors duration-200">
+                Contact
+              </a>
+            </div>
           </div>
 
-          {/* Center: Navigation capsule menu */}
-          <div className="hidden md:flex items-center gap-2 bg-white/[0.02] border border-white/[0.05] rounded-full p-1">
-            <a href="#services" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
-              Services{dropdownArrow}
-            </a>
-            <a href="#projects" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
-              Projects{dropdownArrow}
-            </a>
-            <a href="#contact" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
-              Contact
-            </a>
-          </div>
-
-          {/* Right: Language selection + CTA button */}
+          {/* Right Side: Social links + White CTA Pill Button */}
           <div className="flex items-center gap-6">
-            <div className="hidden sm:flex items-center gap-2 text-neutral-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors duration-200 cursor-pointer">
-              <svg className="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-              </svg>
-              <span>EN</span>
-              {dropdownArrow}
+            <div className="hidden sm:flex items-center gap-5 text-neutral-400 text-xs font-bold uppercase tracking-wider">
+              <a href="https://github.com/rishikkkkkk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/rishitkumar1/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">
+                LinkedIn
+              </a>
+              <a href="https://drive.google.com/file/d/16Z-yR3tqlwp8g7jAb6OhfRfrhocUgRO9/view" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">
+                Resume{dropdownArrow}
+              </a>
             </div>
             <a 
               href="#contact" 
-              className="bg-[#6366f1] text-white hover:bg-[#5053db] font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(99,102,241,0.5)] active:scale-95"
+              className="bg-white text-[#030108] hover:bg-neutral-200 font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-all duration-300 active:scale-95"
             >
-              Get In Touch
+              Hire Me
             </a>
           </div>
         </motion.nav>
       </header>
 
       {/* HERO SECTION */}
-      <main className="px-6 md:px-12 pt-32 pb-24 md:pt-48 md:pb-40 max-w-7xl mx-auto">
+      <main className="px-6 md:px-12 pt-32 pb-24 md:pt-48 md:pb-36 max-w-7xl mx-auto flex flex-col items-center">
+        
+        {/* Subtitle / tag at top */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 text-xs font-bold uppercase tracking-[0.2em] font-mono mb-4 text-center"
+        >
+          Cloud &amp; DevOps Engineering
+        </motion.div>
+
+        {/* Large Bold Heading */}
         <motion.h1 
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="text-[12vw] leading-[0.85] font-bold tracking-tighter text-white mb-12 uppercase mix-blend-difference"
+          className="text-4xl md:text-7xl font-extrabold tracking-tighter text-white text-center leading-[1.05] max-w-5xl mx-auto mb-8 uppercase"
         >
-          Rishit<br />
-          <span className="text-neutral-500"></span> Kumar
+          The #1 Cloud Architect <br />
+          for Resilient Infrastructure.
         </motion.h1>
-        
-        <motion.div 
+
+        {/* Metric / Benchmark subtitle */}
+        <motion.p
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 md:mt-32 backdrop-blur-sm bg-black/10 p-6 -mx-6 rounded-lg border border-white/[0.03]"
+          className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-neutral-500 font-mono text-center max-w-3xl mx-auto mb-10 flex flex-wrap justify-center gap-x-4 gap-y-2"
         >
-          <p className="text-xl md:text-3xl font-light leading-snug tracking-tight text-neutral-200">
-            I don't just provision servers; I build resilient cloud architectures that drive enterprise scale. Specializing in high-performance infrastructure &amp; custom CI/CD automation.
-          </p>
-          <div className="flex flex-col justify-end md:items-end text-sm md:text-base text-neutral-500 uppercase tracking-widest space-y-2">
-            <p>AWS / Azure / Linux</p>
-            <p>Kubernetes / Docker / Terraform</p>
-            <p>Prometheus / ELK / Python</p>
-          </div>
+          <span>#1 IN CI/CD AUTOMATION</span>
+          <span className="hidden sm:inline">·</span>
+          <span>#1 IN HIGH AVAILABILITY</span>
+          <span className="hidden sm:inline">·</span>
+          <span>#1 IN CLOUD NATIVE SYSTEMS</span>
+        </motion.p>
+
+        {/* Centered Dual CTA Buttons */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="flex flex-col sm:flex-row items-center gap-4 mb-16"
+        >
+          <a 
+            href="#contact" 
+            className="w-full sm:w-auto bg-white text-[#030108] hover:bg-neutral-200 font-bold px-7 py-3 rounded-full text-xs uppercase tracking-widest text-center transition-all duration-300"
+          >
+            Start Free Trial
+          </a>
+          <a 
+            href="#projects" 
+            className="w-full sm:w-auto border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 text-white font-bold px-7 py-3 rounded-full text-xs uppercase tracking-widest text-center transition-all duration-300"
+          >
+            View Demo
+          </a>
+        </motion.div>
+
+        {/* Tech Partner logos / text row */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="w-full border-t border-b border-white/[0.05] py-8 flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-neutral-600 text-xs font-bold uppercase tracking-[0.2em] font-mono"
+        >
+          <span>AWS</span>
+          <span>Kubernetes</span>
+          <span>Terraform</span>
+          <span>Docker</span>
+          <span>Prometheus</span>
+          <span>Anthropic</span>
+          <span>Python</span>
         </motion.div>
       </main>
 
       {/* SERVICES */}
-      <section id="services" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent overflow-hidden max-w-7xl mx-auto">
+      <section id="services" className="px-6 md:px-12 py-24 border-t border-white/[0.03] bg-[#030108]/60 backdrop-blur-sm overflow-hidden max-w-7xl mx-auto rounded-3xl mb-12">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -145,7 +206,7 @@ export default function App() {
       </section>
 
       {/* SELECTED WORKS */}
-      <section id="projects" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent max-w-7xl mx-auto">
+      <section id="projects" className="px-6 md:px-12 py-24 border-t border-white/[0.03] bg-transparent max-w-7xl mx-auto">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -194,7 +255,7 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent flex flex-col md:flex-row justify-between items-start md:items-end gap-12 max-w-7xl mx-auto">
+      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-white/[0.03] bg-transparent flex flex-col md:flex-row justify-between items-start md:items-end gap-12 max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
