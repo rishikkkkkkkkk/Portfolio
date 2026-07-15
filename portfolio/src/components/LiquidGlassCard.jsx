@@ -4,6 +4,7 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 export default function LiquidGlassCard({ children, className = '', float = false, floatDelay = 0 }) {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -11,15 +12,15 @@ export default function LiquidGlassCard({ children, className = '', float = fals
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 100, damping: 20 });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 100, damping: 20 });
 
-  // Mouse-following glare (the specular highlight that moves across the glass)
-  const glareX = useTransform(x, [-0.5, 0.5], ['0%', '100%']);
-  const glareY = useTransform(y, [-0.5, 0.5], ['0%', '100%']);
-
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
+    const nx = (e.clientX - rect.left) / rect.width;
+    const ny = (e.clientY - rect.top) / rect.height;
+    x.set(nx - 0.5);
+    y.set(ny - 0.5);
+    // Track percentage for glare position (plain state — no hooks in render)
+    setGlarePos({ x: nx * 100, y: ny * 100 });
   };
 
   const handleMouseLeave = () => {
@@ -28,90 +29,77 @@ export default function LiquidGlassCard({ children, className = '', float = fals
     y.set(0);
   };
 
-  // Float animation (gentle vertical bob, like the panels in the Dribbble video)
-  const floatVariants = float ? {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 5,
-        repeat: Infinity,
-        ease: 'easeInOut',
-        delay: floatDelay,
-      },
-    },
-  } : {};
+  // Float animation — gentle vertical bob like the panels in the Dribbble video
+  const floatAnim = float
+    ? {
+        animate: {
+          y: [0, -8, 0],
+          transition: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: floatDelay },
+        },
+      }
+    : {};
 
   return (
     <motion.div
-      {...floatVariants}
+      {...floatAnim}
       animate={float ? 'animate' : undefined}
       style={{ perspective: '1000px' }}
-      className="w-full"
+      className="w-full h-full"
     >
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d',
-        }}
-        className={`group relative rounded-2xl ${className}`}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        className={`group relative rounded-2xl h-full w-full ${className}`}
       >
-        {/* ── GLASS PANEL BODY ── */}
-        {/* Matches the exact frosted glass look in the Dribbble design */}
+        {/* ── GLASS PANEL ── */}
         <div
           className="relative rounded-2xl overflow-hidden h-full w-full"
           style={{
-            // Core glass: very dark semi-transparent, strong backdrop-blur
-            background: 'rgba(20, 20, 28, 0.55)',
-            backdropFilter: 'blur(28px) saturate(140%) brightness(1.08)',
-            WebkitBackdropFilter: 'blur(28px) saturate(140%) brightness(1.08)',
+            background: 'rgba(18, 18, 28, 0.52)',
+            backdropFilter: 'blur(28px) saturate(140%) brightness(1.06)',
+            WebkitBackdropFilter: 'blur(28px) saturate(140%) brightness(1.06)',
             border: '1px solid rgba(255, 255, 255, 0.10)',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06) inset',
-            transform: 'translateZ(0)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
           }}
         >
-          {/* ── TOP EDGE HIGHLIGHT ── */}
-          {/* The thin bright line at the top of each glass panel */}
+          {/* Top edge highlight — thin bright line at top */}
           <div
-            className="absolute top-0 left-0 right-0 h-[1px]"
+            className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.20) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.20) 70%, transparent 100%)',
+              background:
+                'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.22) 30%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0.22) 70%, transparent 100%)',
             }}
           />
 
-          {/* ── LEFT EDGE HIGHLIGHT ── */}
+          {/* Left edge highlight */}
           <div
-            className="absolute top-0 left-0 bottom-0 w-[1px]"
+            className="absolute top-0 left-0 bottom-0 w-[1px] pointer-events-none"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)',
+              background:
+                'linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)',
             }}
           />
 
-          {/* ── MOUSE-FOLLOWING GLARE (specular highlight) ── */}
-          {/* This is the reflective sheen that slides across the glass surface when you hover */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background: isHovered
-                ? `radial-gradient(ellipse 60% 40% at ${useTransform(glareX, v => v)} ${useTransform(glareY, v => v)}, rgba(255,255,255,0.07) 0%, transparent 70%)`
-                : 'none',
-            }}
-          />
+          {/* Mouse-following specular glare — only visible on hover */}
+          {isHovered && (
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+              style={{
+                background: `radial-gradient(ellipse 55% 38% at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.07) 0%, transparent 70%)`,
+              }}
+            />
+          )}
 
-          {/* ── HOVER BORDER GLOW ── */}
+          {/* Hover border brightening */}
           <div
-            className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              border: '1px solid rgba(255,255,255,0.18)',
-              boxShadow: '0 0 20px rgba(255,255,255,0.04)',
-            }}
+            className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+            style={{ border: '1px solid rgba(255,255,255,0.16)' }}
           />
 
-          {/* ── CONTENT ── */}
+          {/* Content */}
           <div className="relative z-10 h-full w-full">
             {children}
           </div>

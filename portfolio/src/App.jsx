@@ -86,8 +86,6 @@ export default function App() {
       {/* ── FONT IMPORT ── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        * { cursor: url('/src/assets/cursor.svg') 10 2, auto; }
-        a, button { cursor: url('/src/assets/cursor.svg') 10 2, pointer !important; }
       `}</style>
 
       {/* ── CINEMATIC ROOM BACKGROUND ── */}

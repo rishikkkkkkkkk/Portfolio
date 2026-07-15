@@ -7,11 +7,6 @@
     background: #06040f;
     color: #e2e8f0;
     overflow-x: hidden;
-    cursor: url("/src/assets/cursor.svg") 10 2, auto;
-  }
-
-  a, button, [role="button"] {
-    cursor: url("/src/assets/cursor.svg") 10 2, pointer !important;
   }
 }
 
