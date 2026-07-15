@@ -3,108 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    background: #06040f;
-    color: #e2e8f0;
-    overflow-x: hidden;
+  body {
+    @apply bg-background text-slate-300;
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: rgba(6,4,15,0.9); }
-::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.3); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(168,85,247,0.5); }
-
-/* Selection */
-::selection { background: rgba(168,85,247,0.3); color: #fff; }
-
-
-/* Glassmorphism base layer */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 
-    0 4px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+.terminal-glow {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.05);
 }
-
-.glass-panel-hover {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
-}
-
-/* Liquid Blob Animations */
-@keyframes morph-blob-1 {
-  0%, 100% {
-    transform: translate(0px, 0px) scale(1) rotate(0deg);
-  }
-  33% {
-    transform: translate(40px, -60px) scale(1.15) rotate(120deg);
-  }
-  66% {
-    transform: translate(-30px, 30px) scale(0.9) rotate(240deg);
-  }
-}
-
-@keyframes morph-blob-2 {
-  0%, 100% {
-    transform: translate(0px, 0px) scale(1) rotate(0deg);
-  }
-  33% {
-    transform: translate(-50px, 40px) scale(0.85) rotate(-90deg);
-  }
-  66% {
-    transform: translate(40px, -30px) scale(1.2) rotate(180deg);
-  }
-}
-
-@keyframes morph-blob-3 {
-  0%, 100% {
-    transform: translate(0px, 0px) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate(30px, 50px) scale(1.1) rotate(180deg);
-  }
-}
-
-.animate-blob-1 {
-  animation: morph-blob-1 25s infinite alternate ease-in-out;
-}
-
-.animate-blob-2 {
-  animation: morph-blob-2 28s infinite alternate ease-in-out;
-}
-
-.animate-blob-3 {
-  animation: morph-blob-3 22s infinite alternate ease-in-out;
-}
-
-/* Liquid Refraction SVG Filter overlay */
-.liquid-displacement {
-  filter: url(#liquid-refraction);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(5, 6, 15, 0.8);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
