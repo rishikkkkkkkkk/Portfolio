@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ParticlesBackground from './components/ParticlesBackground';
 import LiquidBackground from './components/LiquidBackground';
 import LiquidGlassCard from './components/LiquidGlassCard';
 
@@ -25,9 +24,7 @@ export default function App() {
       {/* LIQUID GLASS BACKDROP (Morphing blobs) */}
       <LiquidBackground />
       
-      {/* GOOGLE ANTIGRAVITY PARTICLE FIELD OVERLAY */}
-      <ParticlesBackground />
-      
+
       {/* FLOATING GLASS HEADER */}
       <header className="fixed top-6 left-0 right-0 z-50 px-6 md:px-12 flex justify-center">
         <motion.nav 
