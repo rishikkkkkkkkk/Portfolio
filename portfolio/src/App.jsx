@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ParticlesBackground from './components/ParticlesBackground';
 
-// --- 2. MAIN PORTFOLIO COMPONENT ---
+// --- MAIN PORTFOLIO COMPONENT ---
 export default function App() {
   const [hoveredProject, setHoveredProject] = useState(null);
 
@@ -19,34 +18,63 @@ export default function App() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
+  const dropdownArrow = (
+    <svg className="w-3 h-3 opacity-60 ml-1.5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  );
+
   return (
-    <div className="relative min-h-screen text-neutral-300 font-sans selection:bg-white selection:text-black">
+    <div className="relative min-h-screen text-neutral-300 font-sans selection:bg-purple-500 selection:text-white">
       
-      {/* GOOGLE ANTIGRAVITY PARTICLE BACKGROUND */}
-      <ParticlesBackground />
-      
-      {/* TOP NAVIGATION */}
-      <motion.nav 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="flex justify-between items-start p-6 md:p-12 text-xs md:text-sm font-medium tracking-wide uppercase text-neutral-500"
-      >
-        <div className="flex items-center gap-4">
-          <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain opacity-90" />
-          <div className="flex flex-col">
-            <span className="text-white">Rishit Kumar | Portfolio</span>
-            <span>Cloud &amp; DevOps Engineering</span>
+      {/* FLOATING GLASS NAVIGATION (Dribbble Hero Header UI Style) */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#04010a]/50 border-b border-white/[0.05]">
+        <motion.nav 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="flex justify-between items-center w-full max-w-7xl mx-auto py-5 px-6 md:px-12"
+        >
+          {/* Left: Eagle Logo */}
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain opacity-90" />
+            <span className="text-white font-extrabold tracking-wider text-sm font-mono">RISHIT.KUMAR</span>
           </div>
-        </div>
-        <div className="flex flex-col items-end">
-          <span>Scroll to Explore</span>
-          <a href="#contact" className="hover:text-white transition-colors duration-300">Contact</a>
-        </div>
-      </motion.nav>
+
+          {/* Center: Navigation capsule menu */}
+          <div className="hidden md:flex items-center gap-2 bg-white/[0.02] border border-white/[0.05] rounded-full p-1">
+            <a href="#services" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
+              Services{dropdownArrow}
+            </a>
+            <a href="#projects" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
+              Projects{dropdownArrow}
+            </a>
+            <a href="#contact" className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:bg-white/[0.08] hover:border-white/10 border border-transparent transition-all duration-300">
+              Contact
+            </a>
+          </div>
+
+          {/* Right: Language selection + CTA button */}
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:flex items-center gap-2 text-neutral-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors duration-200 cursor-pointer">
+              <svg className="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+              </svg>
+              <span>EN</span>
+              {dropdownArrow}
+            </div>
+            <a 
+              href="#contact" 
+              className="bg-[#6366f1] text-white hover:bg-[#5053db] font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(99,102,241,0.5)] active:scale-95"
+            >
+              Get In Touch
+            </a>
+          </div>
+        </motion.nav>
+      </header>
 
       {/* HERO SECTION */}
-      <main className="px-6 md:px-12 pt-12 pb-24 md:pt-24 md:pb-40">
+      <main className="px-6 md:px-12 pt-32 pb-24 md:pt-48 md:pb-40 max-w-7xl mx-auto">
         <motion.h1 
           initial="hidden"
           animate="visible"
@@ -61,7 +89,7 @@ export default function App() {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 md:mt-32 backdrop-blur-sm bg-black/10 p-6 -mx-6 rounded-lg"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 md:mt-32 backdrop-blur-sm bg-black/10 p-6 -mx-6 rounded-lg border border-white/[0.03]"
         >
           <p className="text-xl md:text-3xl font-light leading-snug tracking-tight text-neutral-200">
             I don't just provision servers; I build resilient cloud architectures that drive enterprise scale. Specializing in high-performance infrastructure &amp; custom CI/CD automation.
@@ -75,7 +103,7 @@ export default function App() {
       </main>
 
       {/* SERVICES */}
-      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent overflow-hidden">
+      <section id="services" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent overflow-hidden max-w-7xl mx-auto">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -117,7 +145,7 @@ export default function App() {
       </section>
 
       {/* SELECTED WORKS */}
-      <section className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent">
+      <section id="projects" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent max-w-7xl mx-auto">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -166,7 +194,7 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-neutral-800/50 bg-transparent flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+      <footer id="contact" className="px-6 md:px-12 py-24 border-t border-neutral-900/50 bg-transparent flex flex-col md:flex-row justify-between items-start md:items-end gap-12 max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
