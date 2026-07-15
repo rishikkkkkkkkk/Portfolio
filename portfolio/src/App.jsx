@@ -32,9 +32,12 @@ export default function App() {
         transition={{ duration: 1 }}
         className="flex justify-between items-start p-6 md:p-12 text-xs md:text-sm font-medium tracking-wide uppercase text-neutral-500"
       >
-        <div className="flex flex-col">
-          <span className="text-white">Rishit Kumar | Portfolio</span>
-          <span>Cloud &amp; DevOps Engineering</span>
+        <div className="flex items-center gap-4">
+          <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain opacity-90" />
+          <div className="flex flex-col">
+            <span className="text-white">Rishit Kumar | Portfolio</span>
+            <span>Cloud &amp; DevOps Engineering</span>
+          </div>
         </div>
         <div className="flex flex-col items-end">
           <span>Scroll to Explore</span>
