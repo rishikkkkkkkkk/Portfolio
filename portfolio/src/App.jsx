@@ -1,31 +1,25 @@
-// ============================================================
-// App.jsx — Root component
-// All content sourced from src/data/content.js
-// Sections: Navbar · Hero · About · Experience · Projects ·
-//           Skills · Certifications · Contact · Footer
-// ============================================================
 import React from 'react';
 import Navbar from './sections/Navbar';
 import Hero from './sections/Hero';
-import About from './sections/About';
-import Experience from './sections/Experience';
-import Projects from './sections/Projects';
 import Skills from './sections/Skills';
-import Certifications from './sections/Certifications';
+import Experience from './sections/Experience';
+import About from './sections/About';
+import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0a0e0f]">
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white">
       <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Skills />
-      <Certifications />
-      <Contact />
+      <main>
+        <Hero />
+        <Skills />
+        <Experience />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );

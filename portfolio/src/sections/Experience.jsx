@@ -1,92 +1,64 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { experience } from '../data/content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
 
 export default function Experience() {
   return (
-    <section id="experience" className="border-t border-white/[0.05]">
-      <div className="section-container">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          className="section-label"
-        >
-          Experience
-        </motion.div>
+    <section id="experience" className="bg-black text-white py-16 px-4 md:px-14 lg:px-20 min-h-screen border-t border-neutral-800">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Section Heading */}
+        <h1 className="text-center text-3xl md:text-5xl font-bold tracking-tight text-white mb-12">
+          My <span className="font-extrabold">Experience</span>
+        </h1>
 
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          custom={1}
-          className="section-heading mb-12"
-        >
-          Where I've worked
-        </motion.h2>
-
-        <div className="relative">
-          {/* Vertical timeline line */}
-          <div className="absolute left-0 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent/40 via-accent/20 to-transparent" />
-
-          {experience.map((job, i) => (
-            <motion.div
-              key={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={fadeUp}
-              custom={i}
-              className="relative pl-8 md:pl-20 pb-12 last:pb-0"
+        {/* Experience List */}
+        <div className="space-y-6 max-w-5xl mx-auto">
+          {experience.map((exp, idx) => (
+            <div
+              key={idx}
+              className="border border-neutral-800 rounded-xl p-6 md:p-8 bg-neutral-950/60 hover:border-neutral-700 transition-all duration-300 shadow-xl"
             >
-              {/* Timeline dot */}
-              <div className="absolute left-[-4px] md:left-[20px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent shadow-accent" />
-
-              {/* Card */}
-              <div className="card hover:border-accent/30">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
-                  <div>
-                    <h3 className="text-white font-bold text-lg">{job.role}</h3>
-                    <p className="text-accent font-mono text-sm">{job.company}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <span className="font-mono text-xs text-muted bg-bg-elevated px-3 py-1 rounded-full border border-white/[0.06]">
-                      {job.period}
-                    </span>
-                  </div>
+              {/* Card Top Header */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-4 border-b border-neutral-800">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold text-white tracking-wide">
+                    {exp.role}
+                  </h2>
+                  <h3 className="text-base md:text-lg font-medium text-neutral-400">
+                    {exp.company}
+                  </h3>
                 </div>
 
-                {/* Bullet points */}
-                <ul className="space-y-3 mb-6">
-                  {job.bullets.map((bullet, bi) => (
-                    <li key={bi} className="flex gap-3 text-sm text-muted-light leading-relaxed">
-                      <span className="text-accent mt-1.5 shrink-0">▹</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {job.tags.map((tag) => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
+                <div className="text-left md:text-right font-medium text-sm text-neutral-400">
+                  <p>{exp.period}</p>
+                  <p className="text-xs text-neutral-500">{exp.location}</p>
                 </div>
               </div>
-            </motion.div>
+
+              {/* Bulleted Content */}
+              <ul className="mt-6 space-y-3 list-disc list-inside text-neutral-300 text-sm md:text-base leading-relaxed">
+                {exp.bullets.map((bullet, bIdx) => (
+                  <li key={bIdx} className="pl-1">
+                    <span className="text-neutral-200">{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech Badges */}
+              <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-neutral-900">
+                {exp.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs font-semibold rounded-md"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   );

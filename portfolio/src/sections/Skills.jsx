@@ -1,64 +1,69 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { skillGroups } from '../data/content';
+import { skillsList } from '../data/content';
+import {
+  Cloud,
+  Box,
+  Terminal,
+  Cpu,
+  GitBranch,
+  Activity,
+  BarChart2,
+  Server,
+  Layers,
+  FileCode,
+  HardDrive,
+  Globe,
+  Settings,
+  ShieldCheck,
+  CheckCircle2
+} from 'lucide-react';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] },
-  }),
+const iconMap = {
+  aws: Cloud,
+  kubernetes: Box,
+  docker: Terminal,
+  terraform: Cpu,
+  github: GitBranch,
+  prometheus: Activity,
+  grafana: BarChart2,
+  linux: Server,
+  python: FileCode,
+  bash: Terminal,
+  helm: Layers,
+  elasticsearch: HardDrive,
+  git: GitBranch,
+  azure: Globe
 };
 
 export default function Skills() {
   return (
-    <section id="skills" className="border-t border-white/[0.05]">
-      <div className="section-container">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          className="section-label"
-        >
-          Skills
-        </motion.div>
+    <section id="skills" className="min-h-screen py-16 px-4 md:px-14 lg:px-20 bg-[#f8f9fa] border-t border-neutral-200">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Section Heading */}
+        <h1 className="text-center text-3xl md:text-5xl font-bold tracking-tight text-black mb-12">
+          <span className="font-normal text-neutral-600">My</span> Skills
+        </h1>
 
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          custom={1}
-          className="section-heading mb-12"
-        >
-          My technical toolkit
-        </motion.h2>
+        {/* Responsive Grid Layout (5 columns on desktop) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8 py-4">
+          {skillsList.map((skill) => {
+            const IconComponent = iconMap[skill.icon] || CheckCircle2;
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skillGroups.map((group, i) => (
-            <motion.div
-              key={group.category}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={fadeUp}
-              custom={i}
-              className="card"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-xl">{group.icon}</span>
-                <h3 className="text-white font-semibold text-sm">{group.category}</h3>
+            return (
+              <div
+                key={skill.name}
+                className="social-box flex flex-col items-center justify-center gap-3 h-36 rounded-xl shadow-sm"
+              >
+                <IconComponent className="w-10 h-10 md:w-12 md:h-12 stroke-[1.5]" />
+                <h3 className="font-bold text-sm md:text-base tracking-wide text-center">
+                  {skill.name}
+                </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span key={skill} className="tag">{skill}</span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

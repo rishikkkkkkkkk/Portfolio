@@ -1,122 +1,116 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { certifications, education } from '../data/content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
+import { Award, GraduationCap, CheckCircle } from 'lucide-react';
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="border-t border-white/[0.05]">
-      <div className="section-container">
-        {/* ── Certifications ── */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          className="section-label"
-        >
-          Certifications
-        </motion.div>
-
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          custom={1}
-          className="section-heading mb-8"
-        >
-          AWS Certified
-        </motion.h2>
-
-        <div className="flex flex-wrap gap-4 mb-20">
-          {certifications.map((cert, i) => (
-            <motion.div
-              key={cert.name}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={fadeUp}
-              custom={i}
-              className="card flex items-center gap-4 min-w-[280px]"
-            >
-              {/* AWS Badge icon */}
-              <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 text-lg font-bold"
-                style={{ backgroundColor: `${cert.badgeColor}18`, border: `1px solid ${cert.badgeColor}30` }}
-              >
-                <span style={{ color: cert.badgeColor }}>AWS</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold text-sm leading-snug">{cert.name}</p>
-                <p className="text-muted font-mono text-xs mt-0.5">{cert.issuer} · {cert.date}</p>
-              </div>
-            </motion.div>
-          ))}
+    <section className="py-[76px] bg-paper-warm border-t-2 border-ink">
+      <div className="mx-auto max-w-[1180px] px-5 sm:px-[30px]">
+        {/* Section Header */}
+        <div className="mb-[30px]">
+          <div className="flex flex-wrap items-baseline justify-between gap-5 pb-2.5">
+            <div>
+              <span className="font-gothic text-xs font-bold uppercase tracking-[0.18em] text-ink">
+                Verified Credentials &amp; Studies
+              </span>
+              <h2 className="mt-1.5 font-display text-[clamp(30px,4vw,46px)] font-normal leading-[1.02] tracking-[-0.015em] text-ink">
+                Certifications &amp; Academic Record
+              </h2>
+            </div>
+            <span className="whitespace-nowrap font-gothic text-xs font-semibold uppercase tracking-[0.12em] text-ink-soft">
+              Official Records
+            </span>
+          </div>
+          <div className="h-1 w-full bg-ink" />
         </div>
 
-        {/* ── Education ── */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          className="section-label"
-        >
-          Education
-        </motion.div>
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Column 1: Certifications */}
+          <div className="border-2 border-ink bg-paper p-6 shadow-paper-card">
+            <div className="flex items-center gap-2 border-b-2 border-ink pb-3 mb-5">
+              <Award className="h-6 w-6 text-stamp" />
+              <h3 className="font-gothic text-base font-bold uppercase tracking-[0.14em] text-ink">
+                AWS Industry Certifications
+              </h3>
+            </div>
 
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          custom={1}
-          className="section-heading mb-8"
-        >
-          Academic background
-        </motion.h2>
+            <div className="space-y-4">
+              {certifications.map((cert, idx) => (
+                <div
+                  key={idx}
+                  className="border border-ink/30 bg-paper-bright p-4 relative overflow-hidden"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <span className="font-gothic text-[10px] font-bold uppercase tracking-[0.15em] text-stamp">
+                        Official Badge
+                      </span>
+                      <h4 className="font-display text-xl text-ink font-normal mt-0.5">
+                        {cert.name}
+                      </h4>
+                      <p className="font-mono text-xs text-ink-soft mt-1">
+                        Issuer: {cert.issuer}
+                      </p>
+                    </div>
+                    <span className="border border-ink bg-paper px-2.5 py-1 font-mono text-xs font-bold text-ink shrink-0">
+                      {cert.date}
+                    </span>
+                  </div>
 
-        <div className="space-y-3">
-          {education.map((edu, i) => (
-            <motion.div
-              key={edu.institution}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={fadeUp}
-              custom={i}
-              className={`card flex flex-col md:flex-row md:items-center md:justify-between gap-2 ${
-                edu.highlight ? 'border-accent/20' : ''
-              }`}
-            >
-              <div>
-                <h3 className={`font-semibold ${edu.highlight ? 'text-white text-base' : 'text-muted-lighter text-sm'}`}>
-                  {edu.degree}
-                </h3>
-                <p className="text-muted font-mono text-xs mt-0.5">{edu.institution}</p>
-              </div>
-              <div className="text-right">
-                <span className="font-mono text-xs text-muted bg-bg-elevated px-3 py-1 rounded-full border border-white/[0.06]">
-                  {edu.period}
-                </span>
-                {edu.cgpa && (
-                  <p className="text-accent font-mono text-xs mt-1.5">CGPA {edu.cgpa}</p>
-                )}
-                {edu.score && (
-                  <p className="text-muted font-mono text-xs mt-1.5">{edu.score}</p>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                  {/* Stamp Seal Simulation */}
+                  <div className="mt-3 flex items-center gap-1.5 font-gothic text-[11px] font-bold uppercase tracking-[0.1em] text-ink">
+                    <CheckCircle className="h-3.5 w-3.5 text-stamp" />
+                    <span>AUTHENTICATED BY AWS</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Academic Record */}
+          <div className="border-2 border-ink bg-paper p-6 shadow-paper-card">
+            <div className="flex items-center gap-2 border-b-2 border-ink pb-3 mb-5">
+              <GraduationCap className="h-6 w-6 text-stamp" />
+              <h3 className="font-gothic text-base font-bold uppercase tracking-[0.14em] text-ink">
+                Academic Background
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {education.map((edu, idx) => (
+                <div
+                  key={idx}
+                  className="border border-ink/30 bg-paper-bright p-4"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="font-display text-xl text-ink font-normal">
+                        {edu.degree}
+                      </h4>
+                      <p className="font-text text-sm text-ink-soft mt-0.5">
+                        {edu.institution}
+                      </p>
+                    </div>
+                    <span className="font-mono text-xs text-ink-soft font-semibold shrink-0">
+                      {edu.period}
+                    </span>
+                  </div>
+
+                  {edu.cgpa && (
+                    <div className="mt-2 font-mono text-xs font-bold text-stamp">
+                      Cumulative Score: {edu.cgpa} CGPA
+                    </div>
+                  )}
+                  {edu.score && (
+                    <div className="mt-2 font-mono text-xs font-bold text-stamp">
+                      Final Score: {edu.score}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

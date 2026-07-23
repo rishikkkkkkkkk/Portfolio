@@ -1,94 +1,82 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { personal, summary } from '../data/content';
+import { personal } from '../data/content';
+import { Mail } from 'lucide-react';
+import { LinkedinIcon, GithubIcon } from '../components/SocialIcons';
 
-// ─────────────────────────────────────────
-// HERO — Phase 1 skeleton
-// Full terminal animation added in Phase 2.
-// ─────────────────────────────────────────
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center bg-grid bg-hero-glow overflow-hidden"
-    >
-      {/* Grid overlay fade at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0e0f] pointer-events-none" />
+    <section className="bg-[#f8f9fa] py-8 md:py-16 px-4 md:px-14 lg:px-20 min-h-[calc(100vh-64px)] flex items-center overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-12">
+        
+        {/* Left Column Text Content */}
+        <div className="lg:w-1/2 flex flex-col justify-center">
+          <div>
+            <h1 className="text-3xl md:text-5xl font-normal py-1.5 md:py-2 text-black leading-tight">
+              Hello I'am <span className="text-3xl md:text-5xl font-extrabold text-black">{personal.heroName}</span>
+            </h1>
 
-      <div className="section-container relative z-10 pt-24 pb-16">
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="section-label mb-6"
-        >
-          AWS-Focused DevOps Engineer
-        </motion.div>
+            <h1 className="text-3xl md:text-5xl font-extrabold py-1.5 md:py-2 text-black leading-tight">
+              {personal.heroLine2} <span className="outlined-text">{personal.heroLine2Outline}</span>
+            </h1>
 
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6"
-        >
-          {personal.name}
-        </motion.h1>
+            <h1 className="text-3xl md:text-5xl font-extrabold py-1.5 md:py-2 text-black leading-tight">
+              {personal.heroLine3} <span className="outlined-text">{personal.heroLine3Outline}</span>
+            </h1>
 
-        {/* Summary line */}
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-muted-light max-w-xl text-base leading-relaxed mb-10"
-        >
-          {summary}
-        </motion.p>
+            <h1 className="text-3xl md:text-5xl font-extrabold py-1.5 md:py-2 text-black leading-tight">
+              <span className="font-normal text-neutral-600">Based in</span> {personal.location}
+            </h1>
 
-        {/* Terminal animation placeholder — will be replaced in Phase 2 */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="terminal-window max-w-xl mb-10"
-        >
-          <div className="terminal-titlebar">
-            <span className="terminal-dot bg-red-500/70" />
-            <span className="terminal-dot bg-yellow-500/70" />
-            <span className="terminal-dot bg-green-500/70" />
-            <span className="font-mono text-xs text-muted ml-2">terminal</span>
+            <p className="secondary-color text-base md:text-lg font-normal py-4 md:py-6 max-w-2xl leading-relaxed">
+              {personal.bio}
+            </p>
+
+            {/* Social Icons Row (LinkedIn, GitHub, Email) */}
+            <div className="flex flex-wrap gap-3 md:gap-4 py-4">
+              <a
+                href={personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+              >
+                <div className="social-box">
+                  <LinkedinIcon className="w-6 h-6 md:w-7 md:h-7" />
+                </div>
+              </a>
+
+              <a
+                href={personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+              >
+                <div className="social-box">
+                  <GithubIcon className="w-6 h-6 md:w-7 md:h-7" />
+                </div>
+              </a>
+
+              <a
+                href={`mailto:${personal.email}`}
+                title="Email"
+              >
+                <div className="social-box">
+                  <Mail className="w-6 h-6 md:w-7 md:h-7" />
+                </div>
+              </a>
+            </div>
           </div>
-          <div className="px-5 py-4 font-mono text-sm text-terminal-green">
-            <span className="text-accent">$ </span>
-            <span className="text-white">kubectl get pods --namespace production</span>
-            <span className="animate-blink text-accent ml-1">█</span>
-          </div>
-        </motion.div>
+        </div>
 
-        {/* CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap gap-4"
-        >
-          <a href="#projects" id="cta-view-projects" className="btn-primary">
-            View Projects →
-          </a>
-          <a
-            href={personal.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="cta-download-resume"
-            className="btn-ghost"
-          >
-            Download Resume ↗
-          </a>
-          <a href="#contact" id="cta-contact" className="btn-ghost">
-            Contact Me
-          </a>
-        </motion.div>
+        {/* Right Column: Enlarged Hero Image SVG */}
+        <div className="lg:w-1/2 flex items-center justify-center p-2">
+          <img
+            src="/hero.svg"
+            alt="Hero Developer Illustration"
+            className="w-full h-auto object-fill scale-110 md:scale-125 lg:scale-135 transition-transform duration-300 transform origin-center"
+            loading="lazy"
+          />
+        </div>
+
       </div>
     </section>
   );

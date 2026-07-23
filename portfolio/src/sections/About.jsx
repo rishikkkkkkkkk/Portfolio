@@ -1,83 +1,38 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { personal, summary } from '../data/content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
+import { aboutParagraphs } from '../data/content';
 
 export default function About() {
   return (
-    <section id="about" className="border-t border-white/[0.05]">
-      <div className="section-container">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
-          className="section-label"
-        >
-          About Me
-        </motion.div>
+    <section id="about" className="bg-[#f8f9fa] py-16 px-4 md:px-14 lg:px-20 border-t border-neutral-200 min-h-screen flex items-center overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          
+          {/* Left Column: Enlarged About Image SVG */}
+          <div className="lg:w-1/2 flex items-center justify-center p-4">
+            <img
+              src="/about.svg"
+              alt="About Me Illustration"
+              className="w-full h-auto object-fill scale-125 md:scale-140 lg:scale-150 transition-transform duration-300 transform origin-center"
+              loading="lazy"
+            />
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {/* Left: summary text */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            custom={1}
-          >
-            <h2 className="section-heading">
-              Shipping resilient infrastructure,<br />
-              <span className="text-gradient-accent">one deploy at a time.</span>
-            </h2>
-            <div className="accent-line" />
-            <p className="text-muted-light leading-relaxed">{summary}</p>
-          </motion.div>
+          {/* Right Column: Text Story Content */}
+          <div className="lg:w-1/2 flex flex-col justify-center">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-6">
+              About<span className="font-extrabold">Me</span>
+            </h1>
 
-          {/* Right: quick facts */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            custom={2}
-            className="space-y-4"
-          >
-            {[
-              { label: 'Location', value: personal.location },
-              { label: 'Email', value: personal.email, href: `mailto:${personal.email}` },
-              { label: 'LinkedIn', value: 'linkedin.com/in/rishitkumar1', href: personal.linkedin },
-              { label: 'Certification', value: 'AWS Certified Developer – Associate' },
-              { label: 'Focus', value: 'EKS · Terraform · GitOps · Observability' },
-            ].map(({ label, value, href }) => (
-              <div key={label} className="flex items-start gap-4 font-mono text-sm">
-                <span className="text-accent w-28 shrink-0 text-xs uppercase tracking-wide pt-0.5">
-                  {label}
-                </span>
-                {href ? (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-lighter hover:text-accent transition-colors duration-200 break-all"
-                  >
-                    {value}
-                  </a>
-                ) : (
-                  <span className="text-muted-lighter">{value}</span>
-                )}
-              </div>
-            ))}
-          </motion.div>
+            <div className="space-y-4 text-neutral-700 text-base md:text-lg leading-relaxed font-light">
+              {aboutParagraphs.map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

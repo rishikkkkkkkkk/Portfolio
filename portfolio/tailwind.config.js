@@ -7,55 +7,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base backgrounds
-        bg: {
-          DEFAULT: '#0a0e0f',
-          surface: '#0f1517',
-          elevated: '#141a1c',
-          card: '#161d1f',
+        paper: {
+          DEFAULT: '#f4f1ea',
+          warm: '#ede8df',
+          bright: '#faf8f5',
+          deep: '#e2ddd2',
         },
-        // Teal/cyan accent — the "terminal cursor" color
-        accent: {
-          DEFAULT: '#2dd4bf',
-          dim: '#1a9e8f',
-          glow: 'rgba(45, 212, 191, 0.15)',
-          border: 'rgba(45, 212, 191, 0.25)',
+        ink: {
+          DEFAULT: '#16140f',
+          soft: '#57534a',
+          light: '#787369',
         },
-        // Muted greens for terminal text
-        terminal: {
-          green: '#4ade80',
-          comment: '#4b5563',
-          prompt: '#2dd4bf',
-          output: '#94a3b8',
-          error: '#f87171',
-        },
-        // Neutral grays for text hierarchy
-        muted: {
-          DEFAULT: '#64748b',
-          light: '#94a3b8',
-          lighter: '#cbd5e1',
+        stamp: {
+          DEFAULT: '#a6382c',
+          dark: '#852a1f',
         },
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
-      fontSize: {
-        '2xs': '0.625rem',
-      },
-      backgroundImage: {
-        'grid-pattern': `linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
-                         linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px)`,
-        'accent-gradient': 'linear-gradient(135deg, #2dd4bf, #06b6d4)',
-        'hero-gradient': 'radial-gradient(ellipse 80% 60% at 50% -20%, rgba(45, 212, 191, 0.12) 0%, transparent 70%)',
-      },
-      backgroundSize: {
-        'grid': '40px 40px',
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        gothic: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        text: ['"Newsreader"', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        'accent': '0 0 20px rgba(45, 212, 191, 0.15)',
-        'accent-lg': '0 0 40px rgba(45, 212, 191, 0.2)',
-        'card': '0 4px 24px rgba(0, 0, 0, 0.4)',
+        'paper-card': '0 2px 14px rgba(22, 20, 15, 0.12)',
+        'stamp': '0 0 0 2px #a6382c',
       },
       animation: {
         'blink': 'blink 1s step-end infinite',

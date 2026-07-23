@@ -1,70 +1,57 @@
-import React from 'react';
-import { personal, navLinks } from '../data/content';
+import React, { useState, useEffect } from 'react';
+import { personal } from '../data/content';
+import { ArrowUp } from 'lucide-react';
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <footer className="border-t border-white/[0.05] bg-bg-surface mt-12">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Brand */}
-          <div className="text-center md:text-left">
-            <span className="font-mono text-accent font-bold tracking-wider text-sm">
-              rk<span className="text-white/30">@devops</span>
-            </span>
-            <p className="text-muted font-mono text-xs mt-1">
-              © {year} Rishit Kumar · Jaipur, Rajasthan
-            </p>
+    <footer className="bg-black text-neutral-400 py-10 px-4 md:px-14 lg:px-20 border-t border-neutral-900">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        {/* Brand & Copyright */}
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-white text-black font-bold text-xs flex items-center justify-center">
+            RK
           </div>
-
-          {/* Quick nav */}
-          <div className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                id={`footer-nav-${link.label.toLowerCase()}`}
-                className="font-mono text-xs text-muted hover:text-accent transition-colors duration-200 uppercase tracking-wide"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Social icons */}
-          <div className="flex items-center gap-4">
-            <a
-              href={personal.linkedin}
-              id="footer-linkedin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg border border-white/[0.08] flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all duration-200 font-mono text-xs font-bold"
-              aria-label="LinkedIn"
-            >
-              in
-            </a>
-            <a
-              href={personal.github}
-              id="footer-github"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg border border-white/[0.08] flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all duration-200 font-mono text-xs"
-              aria-label="GitHub"
-            >
-              ⎇
-            </a>
-            <a
-              href={`mailto:${personal.email}`}
-              id="footer-email"
-              className="w-9 h-9 rounded-lg border border-white/[0.08] flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all duration-200 text-sm"
-              aria-label="Email"
-            >
-              ✉
-            </a>
-          </div>
+          <span className="text-white font-bold tracking-wide text-lg">
+            {personal.logoText}
+          </span>
         </div>
+
+        <div className="text-xs md:text-sm font-normal text-neutral-500 text-center md:text-left">
+          © {new Date().getFullYear()} {personal.name}. All rights reserved.
+        </div>
+
       </div>
+
+      {/* Floating Back To Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="scroll-to-top"
+          aria-label="Scroll to top"
+          title="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </footer>
   );
 }
